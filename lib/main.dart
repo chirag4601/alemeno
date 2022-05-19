@@ -8,7 +8,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'dependencies/controller_bindings.dart';
 
 void main() {
-  AwesomeNotifications().initialize(null, [
+  AwesomeNotifications().initialize( null, [
     NotificationChannel(
       channelKey: 'alemeno',
       channelName: 'All in app Notification',

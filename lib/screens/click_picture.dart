@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+import 'package:flutter_gifimage/flutter_gifimage.dart';
 
 class ClickPictureScreen extends StatefulWidget {
   const ClickPictureScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class ClickPictureScreen extends StatefulWidget {
   _ClickPictureScreenState createState() => _ClickPictureScreenState();
 }
 
-class _ClickPictureScreenState extends State<ClickPictureScreen> {
+class _ClickPictureScreenState extends State<ClickPictureScreen> with SingleTickerProviderStateMixin{
   File? image;
   Controller controller = Get.find<Controller>();
 
@@ -25,7 +26,14 @@ class _ClickPictureScreenState extends State<ClickPictureScreen> {
         FirebaseStorage.instance.ref().child('uploads/$fileName');
     firebaseStorageRef.putFile(image!);
   }
+  GifController? gifController;
 
+  @override
+  void initState() {
+    super.initState();
+    gifController = GifController( vsync: this);
+  }
+  double animationValue = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +46,13 @@ class _ClickPictureScreenState extends State<ClickPictureScreen> {
                 height: 24,
               ),
               const GoBackButton(),
-              SizedBox(
-                height: 130,
-                child: Image.asset("assets/animal.jpg"),
+              // SizedBox(
+              //   height: 130,
+              //   child: Image.asset("assets/animal.jpg"),
+              // ),
+              GifImage(
+                controller: gifController!,
+                image: const NetworkImage("https://firebasestorage.googleapis.com/v0/b/alemeno-7c797.appspot.com/o/animals%2Fdinosaur3_baby_normal_idle.gif?alt=media&token=9c997037-4b81-4ed0-9283-20c785d76e0b"),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -108,12 +120,19 @@ class _ClickPictureScreenState extends State<ClickPictureScreen> {
                     image == null
                         ? TextButton(
                             onPressed: () async {
-                              var temp = await ImagePicker()
-                                  .pickImage(source: ImageSource.camera);
-                              if (temp != null) {
-                                setState(() {
-                                  image = File(temp.path);
-                                });
+                              // var temp = await ImagePicker()
+                              //     .pickImage(source: ImageSource.camera);
+                              // if (temp != null) {
+                              //   setState(() {
+                              //     image = File(temp.path);
+                              //   });
+                              // }
+                              if (gifController!.isAnimating){
+                                animationValue = gifController!.duration.inSeconds.toDouble();
+                                gifController!.stop(canceled: false);
+                              }
+                              else{
+                                gifController!.animateTo(animationValue);
                               }
                             },
                             child: const CircleAvatar(

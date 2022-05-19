@@ -12,13 +12,6 @@ class GoodJobScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // const Text(
-              //   "Counter: ",
-              //   style: TextStyle(
-              //     fontSize: 24,
-              //     color: Colors.black,
-              //   ),
-              // ),
               const Text(
                 "Good Job!",
                 style: TextStyle(
