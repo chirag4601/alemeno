@@ -39,7 +39,6 @@ class _ClickPictureScreenState extends State<ClickPictureScreen> with SingleTick
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             children: [
               const SizedBox(
@@ -52,7 +51,10 @@ class _ClickPictureScreenState extends State<ClickPictureScreen> with SingleTick
               // ),
               GifImage(
                 controller: gifController!,
-                image: const NetworkImage("https://firebasestorage.googleapis.com/v0/b/alemeno-7c797.appspot.com/o/animals%2Fdinosaur3_baby_normal_idle.gif?alt=media&token=9c997037-4b81-4ed0-9283-20c785d76e0b"),
+                image:
+                //Image.network("https://firebasestorage.googleapis.com/v0/b/alemeno-7c797.appspot.com/o/animals%2Fdinosaur3_baby_normal_idle.gif?alt=media&token=9c997037-4b81-4ed0-9283-20c785d76e0b")
+
+                 NetworkImage("https://firebasestorage.googleapis.com/v0/b/alemeno-7c797.appspot.com/o/animals%2Fdinosaur3_baby_normal_idle.gif?alt=media&token=9c997037-4b81-4ed0-9283-20c785d76e0b"),
               ),
               Container(
                 decoration: BoxDecoration(
